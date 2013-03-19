@@ -6,14 +6,12 @@
     <th>Description</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @profile_accounts.each do |profile_account| %>
   <tr>
-    <td><%= profile_account.name %></td>
+    <td><%= link_to profile_account.name, profile_account %></td>
     <td><%= profile_account.description %></td>
-    <td><%= link_to 'Show', profile_account %></td>
     <td><%= link_to 'Edit', edit_profile_account_path(profile_account) %></td>
     <td><%= link_to 'Destroy', profile_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

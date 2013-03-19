@@ -2,12 +2,12 @@
 
 <p>
   <b>Name:</b>
-  <%= @profile_account.name %>
+  <%= link_to @profile_account.name, edit_profile_account_path(@profile_account) %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @profile_account.description %>
+  <%= link_to @profile_account.description, edit_profile_account_path(@profile_account) %>
 </p>
 
 <table class="table">
@@ -17,7 +17,7 @@
   <% @profile_account.line_items.each do |line_item| %>
     <tr>
       <td><%= link_to line_item.name, edit_profile_account_line_item_path(@profile_account, line_item) %></td>
-      <td><%= line_item.price %></td>
+      <td><%= number_to_currency(line_item.price) %></td>
       <td><%= line_item.date_of_purchase %></td>
       <td><%= line_item.description %></td>
     </tr>
