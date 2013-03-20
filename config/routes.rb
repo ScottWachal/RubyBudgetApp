@@ -1,7 +1,14 @@
 RubyBudget::Application.routes.draw do
-  resources :line_items
   resources :profile_accounts do
     resources :line_items
+
+    resources :envelopes do
+      resources :line_items
+    end
+
+    resources :accounts do
+      resources :line_items
+    end
   end
 
   root :to => 'profile_accounts#index'
