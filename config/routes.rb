@@ -3,11 +3,11 @@ RubyBudget::Application.routes.draw do
     resources :line_items
 
     resources :envelopes do
-      resources :line_items
+      get :line_items, on: :member
     end
 
     resources :accounts do
-      resources :line_items
+      get :line_items, on: :member
     end
   end
 
