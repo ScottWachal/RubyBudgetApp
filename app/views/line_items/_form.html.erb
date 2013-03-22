@@ -15,18 +15,32 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :price %><br />
     $<%= f.text_field :price %>
   </div>
+
+  <div>
+    <%= f.label :envelope_id %><br />
+    <%= f.collection_select :envelope_id, @profile_account.envelopes, :id, :name, :prompt => "Select an Envelope" %>
+  </div>
+
+  <div>
+    <%= f.label :account_id %><br />
+    <%= f.collection_select :account_id, @profile_account.accounts, :id, :name, :prompt => "Select an Account" %>
+  </div>
+
   <div class="field">
     <%= f.label :date_of_purchase %><br />
     <%= f.date_select :date_of_purchase %>
   </div>
+
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

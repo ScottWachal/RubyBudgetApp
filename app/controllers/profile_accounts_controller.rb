@@ -13,8 +13,11 @@ class ProfileAccountsController < ApplicationController
   # GET /profile_accounts/1
   # GET /profile_accounts/1.json
   def show
-    @profile_account = ProfileAccount.find(params[:id])
-
+    @profile_account  = ProfileAccount.find(params[:id])
+    @line_items = LineItem.find(:all,
+       :joins => [:envelope, :account],
+       :select => "*, envelopes.name, accounts.name",
+       :group => "envelopes.name, accounts.name")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @profile_account }

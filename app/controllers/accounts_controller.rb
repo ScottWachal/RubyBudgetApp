@@ -1,4 +1,11 @@
 class AccountsController < ApplicationController
+  before_filter :init_profile_account_and_account
+
+  def init_profile_account_and_account
+    @profile_account = ProfileAccount.find(params[:profile_account_id])
+    @account = params[:id] ? Account.find(params[:id]) : Account.new
+  end
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -40,11 +47,11 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(params[:account])
+    @account = @profile_account.accounts.new(params[:account])
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
+        format.html { redirect_to profile_account_path(@profile_account), notice: 'Account was successfully created.' }
         format.json { render json: @account, status: :created, location: @account }
       else
         format.html { render action: "new" }
@@ -60,7 +67,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.update_attributes(params[:account])
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+        format.html { redirect_to profile_account_path(@profile_account), notice: 'Account was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +83,7 @@ class AccountsController < ApplicationController
     @account.destroy
 
     respond_to do |format|
-      format.html { redirect_to accounts_url }
+      format.html { redirect_to profile_account_path(@profile_account) }
       format.json { head :no_content }
     end
   end

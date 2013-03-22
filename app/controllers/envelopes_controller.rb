@@ -1,4 +1,11 @@
 class EnvelopesController < ApplicationController
+  before_filter :init_profile_account_and_envelope
+
+  def init_profile_account_and_envelope
+    @profile_account = ProfileAccount.find(params[:profile_account_id])
+    @envelope = params[:id] ? Envelope.find(params[:id]) : Envelope.new
+  end
+
   # GET /envelopes
   # GET /envelopes.json
   def index
@@ -25,7 +32,6 @@ class EnvelopesController < ApplicationController
   # GET /envelopes/new.json
   def new
     @envelope = Envelope.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @envelope }
@@ -40,11 +46,11 @@ class EnvelopesController < ApplicationController
   # POST /envelopes
   # POST /envelopes.json
   def create
-    @envelope = Envelope.new(params[:envelope])
+    @envelope = @profile_account.envelopes.new(params[:envelope])
 
     respond_to do |format|
       if @envelope.save
-        format.html { redirect_to @envelope, notice: 'Envelope was successfully created.' }
+        format.html { redirect_to profile_account_path(@profile_account), notice: 'Envelope was successfully created.' }
         format.json { render json: @envelope, status: :created, location: @envelope }
       else
         format.html { render action: "new" }
@@ -60,7 +66,7 @@ class EnvelopesController < ApplicationController
 
     respond_to do |format|
       if @envelope.update_attributes(params[:envelope])
-        format.html { redirect_to @envelope, notice: 'Envelope was successfully updated.' }
+        format.html { redirect_to profile_account_path(@profile_account), notice: 'Envelope was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +82,7 @@ class EnvelopesController < ApplicationController
     @envelope.destroy
 
     respond_to do |format|
-      format.html { redirect_to envelopes_url }
+      format.html { redirect_to profile_account_path(@profile_account) }
       format.json { head :no_content }
     end
   end

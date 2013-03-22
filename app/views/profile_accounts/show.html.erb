@@ -8,26 +8,69 @@
 <p>
   <b>Description:</b>
   <%= link_to @profile_account.description, edit_profile_account_path(@profile_account) %>
+  <br /><br />
 </p>
 
+<p>
+  <b>Envelopes</b>
+</p>
 <table class="table">
   <tr>
-    <th>Name</th><th>Price</th><th>Date</th><th>Description</th>
+    <th>Name</th><th>Budget</th>
   </tr>
-  <% @profile_account.line_items.each do |line_item| %>
+  <% @profile_account.envelopes.each do |envelope| %>
+    <tr>
+      <td><%= link_to envelope.name, edit_profile_account_envelope_path(@profile_account, envelope) %></td>
+      <td><%= number_to_currency(envelope.budget) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="2">
+      <%= link_to "New Envelope", new_profile_account_envelope_path(@profile_account) %>
+    </td>
+  </tr>
+</table>
+
+<p>
+  <b>Accounts</b>
+</p>
+<table class="table">
+  <tr>
+    <th>Name</th><th>Balance</th>
+  </tr>
+  <% @profile_account.accounts.each do |account| %>
+    <tr>
+      <td><%= link_to account.name, edit_profile_account_account_path(@profile_account, account) %></td>
+      <td><%= number_to_currency(account.balance) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="2">
+      <%= link_to "New Account", new_profile_account_account_path(@profile_account) %>
+    </td>
+  </tr>
+</table>
+
+<p>
+  <b>All of your transactions</b>
+</p>
+<table class="table">
+  <tr>
+    <th>Name</th><th>Price</th><th>Date</th><th>Description</th><th>Envelope</th><th>Account</th>
+  </tr>
+  <% @line_items.each do |line_item| %>
     <tr>
       <td><%= link_to line_item.name, edit_profile_account_line_item_path(@profile_account, line_item) %></td>
       <td><%= number_to_currency(line_item.price) %></td>
       <td><%= line_item.date_of_purchase %></td>
       <td><%= line_item.description %></td>
+      <td><%= line_item.envelope.name %></td>
+      <td><%= line_item.account.name %></td>
     </tr>
   <% end %>
   <tr>
-    <td>
+    <td colspan="4">
       <%= link_to "New Line Item", new_profile_account_line_item_path(@profile_account) %>
     </td>
   </tr>
 </table>
-
-<%= link_to 'Edit', edit_profile_account_path(@profile_account) %> |
-<%= link_to 'Back', profile_accounts_path %>
