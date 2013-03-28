@@ -20,7 +20,7 @@
   </tr>
   <% @profile_account.envelopes.each do |envelope| %>
     <tr>
-      <td><%= link_to envelope.name, edit_profile_account_envelope_path(@profile_account, envelope) %></td>
+      <td><%= link_to envelope.name, line_items_profile_account_envelope_path(@profile_account, envelope)%></td>
       <td><%= number_to_currency(envelope.budget) %></td>
     </tr>
   <% end %>

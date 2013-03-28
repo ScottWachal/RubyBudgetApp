@@ -6,6 +6,14 @@ class EnvelopesController < ApplicationController
     @envelope = params[:id] ? Envelope.find(params[:id]) : Envelope.new
   end
 
+  def line_items
+    @line_items = @envelope.line_items
+    respond_to do |format|
+      format.html # line_items.html.erb
+      format.json { render json: @envelope }
+    end
+  end
+
   # GET /envelopes
   # GET /envelopes.json
   def index
