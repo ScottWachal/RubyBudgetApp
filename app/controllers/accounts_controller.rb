@@ -6,6 +6,13 @@ class AccountsController < ApplicationController
     @account = params[:id] ? Account.find(params[:id]) : Account.new
   end
 
+  def line_items
+    respond_to do |format|
+      format.html # line_items.html.erb
+      format.json { render json: @account }
+    end
+  end
+
   # GET /accounts
   # GET /accounts.json
   def index

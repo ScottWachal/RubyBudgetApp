@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Account</h1>
+<p>
+  <b>Name:</b>
+  <%= @account.name %>
+</p>
+
+<p>
+  <b>Balance:</b>
+  <%= @account.balance %>
+</p>
+
+<%= link_to 'Edit', edit_profile_account_account_path(@profile_account,@account) %>
+
+<h1>Listing line_items</h1>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Date of purchase</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @account.line_items.each do |line_item| %>
+  <tr>
+    <td><%= line_item.name %></td>
+    <td><%= line_item.price %></td>
+    <td><%= line_item.date_of_purchase %></td>
+    <td><%= line_item.description %></td>
+    <td><%= link_to 'Edit', edit_profile_account_line_item_path(@profile_account,line_item) %></td>
+    <td><%= link_to 'Destroy', profile_account_line_item_path(@profile_account,line_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Line item', new_profile_account_line_item_path(@profile_account) %>
