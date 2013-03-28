@@ -4,12 +4,15 @@ RubyBudget::Application.routes.draw do
 
     resources :envelopes do
       get :line_items, on: :member
+      get 'line_item/new(.:format)/:type/:allocate', to: 'line_items#new', as: 'allocate_budget', on: :member, :defaults => { :type => "envelope", :allocate => true }
     end
 
     resources :accounts do
       get :line_items, on: :member
+      get 'line_item/new(.:format)/:type/:allocate', to: 'line_items#new', as: 'allocate_balance', on: :member, :defaults => { :type => "account", :allocate => true }
     end
   end
+
 
   root :to => 'profile_accounts#index'
 

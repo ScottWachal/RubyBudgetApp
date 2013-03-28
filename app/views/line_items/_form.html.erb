@@ -21,6 +21,11 @@
     $<%= f.text_field :price %>
   </div>
 
+  <div class="field">
+    <%= f.label :allocation %><br />
+    <%= f.text_field :allocation %>
+  </div>
+
   <div>
     <%= f.label :envelope_id %><br />
     <%= f.collection_select :envelope_id, @profile_account.envelopes, :id, :name, :prompt => "Select an Envelope" %>

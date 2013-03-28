@@ -10,6 +10,12 @@
   <b>Budget:</b>
   <%= @envelope.budget %>
 </p>
+<p>
+  <b>Current Budget:</b>
+  <%= @envelope.current_budget %>
+</p>
+
+<%= link_to 'Adjust Current Budget', allocate_budget_profile_account_envelope_path(@profile_account,@envelope) %>
 
 <%= link_to 'Edit', edit_profile_account_envelope_path(@profile_account,@envelope) %>
 

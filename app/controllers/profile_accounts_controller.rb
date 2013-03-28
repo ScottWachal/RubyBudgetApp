@@ -14,6 +14,7 @@ class ProfileAccountsController < ApplicationController
   # GET /profile_accounts/1.json
   def show
     @profile_account  = ProfileAccount.find(params[:id])
+    @line_items = @profile_account.line_items
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @profile_account }

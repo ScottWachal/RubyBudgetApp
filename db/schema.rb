@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320144119) do
+ActiveRecord::Schema.define(:version => 20130328195257) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
-    t.decimal  "balance",            :precision => 10, :scale => 2
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "profile_account_id"
   end
 
@@ -34,11 +33,12 @@ ActiveRecord::Schema.define(:version => 20130320144119) do
     t.decimal  "price",              :precision => 10, :scale => 2
     t.date     "date_of_purchase"
     t.text     "description"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
     t.integer  "profile_account_id"
     t.integer  "envelope_id"
     t.integer  "account_id"
+    t.boolean  "allocation",                                        :default => false
   end
 
   create_table "profile_accounts", :force => true do |t|

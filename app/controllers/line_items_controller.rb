@@ -21,7 +21,13 @@ class LineItemsController < ApplicationController
   # GET /line_items/new
   # GET /line_items/new.json
   def new
-    @line_item = LineItem.new
+    @allocate = params[:allocate]
+    if(params[:type] == 'envelope')
+      @envelope = Envelope.find(params[:id])
+    elsif(params[:type] == 'account')
+      @account = Account.find(params[:id])
+    end
+    @line_item = LineItem.new(allocation: @allocate)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @line_item }
@@ -30,7 +36,6 @@ class LineItemsController < ApplicationController
 
   # GET /line_items/1/edit
   def edit
-    @line_item = LineItem.find(params[:id])
   end
 
   # POST /line_items

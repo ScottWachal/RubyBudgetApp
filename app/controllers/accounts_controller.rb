@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
   end
 
   def line_items
+    @line_items = @account.line_items
     respond_to do |format|
       format.html # line_items.html.erb
       format.json { render json: @account }
@@ -48,7 +49,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-    @account = Account.find(params[:id])
   end
 
   # POST /accounts

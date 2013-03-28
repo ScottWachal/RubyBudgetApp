@@ -11,6 +11,8 @@
   <%= @account.balance %>
 </p>
 
+<%= link_to 'Add Balance Adjustment', allocate_balance_profile_account_account_path(@profile_account,@account) %>
+
 <%= link_to 'Edit', edit_profile_account_account_path(@profile_account,@account) %>
 
 <%= render :template => 'line_items/index.html.erb' %>
