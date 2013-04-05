@@ -47,9 +47,12 @@
           <a class="brand" href="<%= root_path %>">RubyBudget</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "/path1", root_path %></li>
-              <li><%= link_to "/path2", root_path %></li>
-              <li><%= link_to "/path3", root_path %></li>
+            <% unless @profile_account.nil? %>
+              <li><%= link_to "/My Account", profile_account_path(@profile_account) %></li>
+              <li><%= link_to "/Transactions", profile_account_line_items_path(@profile_account) %></li>
+              <li><%= link_to "/Envelopes", profile_account_envelopes_path(@profile_account) %></li>
+              <li><%= link_to "/Accounts", profile_account_accounts_path(@profile_account) %></li>
+            <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -62,17 +65,20 @@
             <%= bootstrap_flash %>
             <%= yield %>
           </div>
+              <% unless @profile_account.nil? %>
           <div class="span3">
             <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
+              <h3>Options</h3>
               <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link 1", root_path %></li>
-                <li><%= link_to "Link 2", root_path %></li>
-                <li><%= link_to "Link 3", root_path %></li>
+                <li class="nav-header">Shortcuts</li>
+                <li><%= link_to "/My Account", profile_account_path(@profile_account) %></li>
+                <li><%= link_to "/Transactions", profile_account_line_items_path(@profile_account) %></li>
+                <li><%= link_to "/Envelopes", profile_account_envelopes_path(@profile_account) %></li>
+                <li><%= link_to "/Accounts", profile_account_accounts_path(@profile_account) %></li>
               </ul>
             </div><!--/.well -->
           </div><!--/span-->
+              <% end %>
         </div><!--/row-->
 
       <footer>

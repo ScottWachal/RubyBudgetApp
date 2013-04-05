@@ -4,6 +4,7 @@ class LineItemsController < ApplicationController
 
   def init_profile_account_and_line_item
     @profile_account = ProfileAccount.find(params[:profile_account_id])
+    @line_items = @profile_account.line_items
     @line_item = params[:id] ? LineItem.find(params[:id]) : LineItem.new
   end
 
