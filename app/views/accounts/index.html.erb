@@ -1,24 +1,21 @@
-<h1>Listing accounts</h1>
-
-<table>
+<p><b>Accounts</b></p>
+<table class="table">
   <tr>
-    <th>Name</th>
-    <th>Balance</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Name</th><th>Balance</th>
   </tr>
-
-<% @accounts.each do |account| %>
-  <tr>
-    <td><%= account.name %></td>
-    <td><%= account.balance %></td>
-    <td><%= link_to 'Show', profile_account_path(@profile_account) %></td>
-    <td><%= link_to 'Edit', edit_profile_account_account_path(@profile_account, account) %></td>
-  </tr>
+<% if @accounts.empty? %>
+  <tr><td colspan="2"><span class="warning">No accounts created yet.</span></td></tr>
+<% else %>
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= link_to account.name, line_items_profile_account_account_path(@profile_account, account) %></td>
+      <td><%= number_to_currency(account.balance) %></td>
+    </tr>
+  <% end %>
 <% end %>
+  <tr>
+    <td colspan="2">
+      <%= link_to "New Account", new_profile_account_account_path(@profile_account) %>
+    </td>
+  </tr>
 </table>
-
-<br />
-
-<%= link_to 'New Account', new_profile_account_account_path(@profile_account) %>

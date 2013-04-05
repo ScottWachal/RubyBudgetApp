@@ -1,24 +1,26 @@
-<h1>Listing envelopes</h1>
-
-<table>
+<p><b>Envelopes</b></p>
+<table class="table">
   <tr>
-    <th>Name</th>
-    <th>Budget</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Name</th><th>Budget</th><th>Current Budget</th>
   </tr>
-
-<% @envelopes.each do |envelope| %>
+  <% if @envelopes.empty? %>
+    <tr>
+      <td colspan="3">
+        <span class="warning">No envelopes created yet.</span>
+      </td>
+    </tr>
+  <% else %>
+    <% @envelopes.each do |envelope| %>
+      <tr>
+        <td><%= link_to envelope.name, line_items_profile_account_envelope_path(@profile_account, envelope)%></td>
+        <td><%= number_to_currency(envelope.budget) %></td>
+        <td><%= number_to_currency(envelope.current_budget) %></td>
+      </tr>
+    <% end %>
+  <% end %>
   <tr>
-    <td><%= envelope.name %></td>
-    <td><%= envelope.budget %></td>
-    <td><%= link_to 'Show',  profile_account_envelope_path(@profile_account,envelope)  %></td>
-    <td><%= link_to 'Edit', edit_profile_account_envelope_path(@profile_account,envelope) %></td>
+    <td colspan="3">
+      <%= link_to "New Envelope", new_profile_account_envelope_path(@profile_account) %>
+    </td>
   </tr>
-<% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Envelope', new_profile_account_envelope_path(@profile_account) %>

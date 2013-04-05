@@ -11,45 +11,6 @@
   <br /><br />
 </p>
 
-<p>
-  <b>Envelopes</b>
-</p>
-<table class="table">
-  <tr>
-    <th>Name</th><th>Budget</th><th>Current Budget</th>
-  </tr>
-  <% @profile_account.envelopes.each do |envelope| %>
-    <tr>
-      <td><%= link_to envelope.name, line_items_profile_account_envelope_path(@profile_account, envelope)%></td>
-      <td><%= number_to_currency(envelope.budget) %></td>
-      <td><%= number_to_currency(envelope.current_budget) %></td>
-    </tr>
-  <% end %>
-  <tr>
-    <td colspan="2">
-      <%= link_to "New Envelope", new_profile_account_envelope_path(@profile_account) %>
-    </td>
-  </tr>
-</table>
-
-<p>
-  <b>Accounts</b>
-</p>
-<table class="table">
-  <tr>
-    <th>Name</th><th>Balance</th>
-  </tr>
-  <% @profile_account.accounts.each do |account| %>
-    <tr>
-      <td><%= link_to account.name, line_items_profile_account_account_path(@profile_account, account) %></td>
-      <td><%= number_to_currency(account.balance) %></td>
-    </tr>
-  <% end %>
-  <tr>
-    <td colspan="2">
-      <%= link_to "New Account", new_profile_account_account_path(@profile_account) %>
-    </td>
-  </tr>
-</table>
-
+<%= render :template => 'envelopes/index.html.erb' %>
+<%= render :template => 'accounts/index.html.erb' %>
 <%= render :template => 'line_items/index.html.erb' %>

@@ -1,6 +1,3 @@
-<% unless @line_items.empty? %>
-<br />
-<br />
 <p><b>Listing line_items</b></p>
 <table class="table">
   <tr>
@@ -13,20 +10,25 @@
     <th></th>
   </tr>
 
-<% @line_items.each do |line_item| %>
-  <tr>
-    <td><%= link_to line_item.name, edit_profile_account_line_item_path(@profile_account,line_item) %></td>
-    <td><%= number_to_currency(line_item.price) %></td>
-    <td><%= line_item.date_of_purchase %></td>
-    <td><%= line_item.description %></td>
-    <td><%= !line_item.envelope.nil? ? line_item.envelope.name : "Unassigned" %></td>
-    <td><%= !line_item.account.nil? ? line_item.account.name : "Unassigned" %></td>
-    <td><%= link_to 'Destroy', profile_account_line_item_path(@profile_account,line_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @line_items.empty? %>
+    <tr><td colspan="7"><span class="warning">No transactions created yet.</span></td></tr>
+<% else %>
+  <% @line_items.each do |line_item| %>
+    <tr>
+      <td><%= link_to line_item.name, edit_profile_account_line_item_path(@profile_account,line_item) %></td>
+      <td><%= number_to_currency(line_item.price) %></td>
+      <td><%= line_item.date_of_purchase %></td>
+      <td><%= line_item.description %></td>
+      <td><%= !line_item.envelope.nil? ? line_item.envelope.name : "Unassigned" %></td>
+      <td><%= !line_item.account.nil? ? line_item.account.name : "Unassigned" %></td>
+      <td><%= link_to 'Destroy', profile_account_line_item_path(@profile_account,line_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
 <% end %>
+<% end %>
+<tr>
+  <td colspan="7">
+    <%= link_to 'New Line item', new_profile_account_line_item_path(@profile_account) %>
+  </td>
+</tr>
 </table>
-<% end %>
 
-<br />
-<br />
-<%= link_to 'New Line item', new_profile_account_line_item_path(@profile_account) %>

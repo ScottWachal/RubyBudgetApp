@@ -20,12 +20,10 @@
     <%= f.label :price %><br />
     $<%= f.text_field :price %>
   </div>
-
+<% unless @line_item.allocation %>
   <div class="field">
-    <%= f.label :allocation %><br />
-    <%= f.text_field :allocation %>
+    <%= f.label :allocation %> <%= f.check_box :allocation %>
   </div>
-
   <div>
     <%= f.label :envelope_id %><br />
     <%= f.collection_select :envelope_id, @profile_account.envelopes, :id, :name, :prompt => "Select an Envelope" %>
@@ -35,6 +33,7 @@
     <%= f.label :account_id %><br />
     <%= f.collection_select :account_id, @profile_account.accounts, :id, :name, :prompt => "Select an Account" %>
   </div>
+<% end %>
 
   <div class="field">
     <%= f.label :date_of_purchase %><br />
